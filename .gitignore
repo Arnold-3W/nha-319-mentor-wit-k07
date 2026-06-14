@@ -1,0 +1,11 @@
+# Backup ảnh gốc (không cần đẩy lên web)
+_originals/
+
+# Cấu hình công cụ
+.claude/
+
+# File video lớn / tạm (chỉ giữ bản web đã nén)
+*.mov
+Video/VIDEO-319.mp4
+Video/ff2pass*
+Video/*.log

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nhà 319 · Mentor WiT K07 — Yêu thương & Đồng hành</title>
+<meta name="description" content="Landing page lưu giữ những khoảnh khắc đáng nhớ của Nhà 319 sau hơn 8 tháng đồng hành cùng nhau hoàn thành chương trình Mentor WiT K07.">
+<link rel="icon" href="z7934497619547_6f23dc38b85cc9c8e1e746c7857df694.jpg" type="image/jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#f26522;
+    --orange-dark:#e2521a;
+    --orange-light:#ff8a3d;
+    --cream:#fff7f0;
+    --ink:#2c2118;
+    --muted:#7c6a5c;
+    --shadow:0 18px 50px rgba(226,82,26,.18);
+    --radius:22px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Be Vietnam Pro',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    overflow-x:hidden;
+    line-height:1.7;
+  }
+  .script{font-family:'Pacifico',cursive;font-weight:400}
+  img{display:block;max-width:100%}
+  section{position:relative}
+  .wrap{width:min(1180px,92vw);margin-inline:auto}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px clamp(16px,4vw,48px);
+    transition:.4s;
+  }
+  nav{background:linear-gradient(180deg,rgba(28,17,9,.42),rgba(28,17,9,0))}
+  nav.scrolled{background:rgba(255,247,240,.92);backdrop-filter:blur(12px);box-shadow:0 6px 24px rgba(226,82,26,.10)}
+  nav .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.5px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+  nav.scrolled .brand{color:var(--orange-dark);text-shadow:none}
+  nav .brand img{width:42px;height:42px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.35))}
+  nav .links{display:flex;gap:26px}
+  nav .links a{
+    text-decoration:none;color:#fff;font-weight:600;font-size:.95rem;
+    position:relative;opacity:.96;transition:.25s;text-shadow:0 2px 8px rgba(0,0,0,.55);
+  }
+  nav.scrolled .links a{color:var(--ink);font-weight:500;opacity:.85;text-shadow:none}
+  nav .links a:hover{opacity:1;color:#ffd9bf}
+  nav.scrolled .links a:hover{color:var(--orange)}
+  nav .links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--orange);transition:.25s}
+  nav .links a:hover::after{width:100%}
+  @media(max-width:760px){nav .links{display:none}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
+    padding:120px 20px 80px;position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 85% 75% at 50% 54%,rgba(35,22,12,.5),rgba(35,22,12,.12) 62%,rgba(35,22,12,0) 100%),
+      linear-gradient(180deg,rgba(20,12,6,.30),rgba(242,101,34,.15)),
+      url("z7934496491775_07288435a09e8bd86634802a55a672da.jpg") center/cover;
+    transform:scale(1.08);animation:slowzoom 20s ease-in-out infinite alternate;
+  }
+  @keyframes slowzoom{to{transform:scale(1)}}
+  .hero-inner{position:relative;z-index:2;color:#fff;max-width:860px}
+  .hero-logo{width:clamp(130px,20vw,180px);margin:0 auto 26px;filter:drop-shadow(0 10px 30px rgba(0,0,0,.35));animation:floaty 5s ease-in-out infinite}
+  @keyframes floaty{50%{transform:translateY(-12px)}}
+  .hero h1{font-size:clamp(2.6rem,7vw,5rem);font-weight:800;line-height:1.05;text-shadow:0 4px 26px rgba(0,0,0,.6),0 1px 3px rgba(0,0,0,.45)}
+  .hero h1 .script{display:block;font-size:clamp(1.5rem,4vw,2.6rem);color:#ffe9da;margin-bottom:.2em;text-shadow:0 2px 16px rgba(0,0,0,.55)}
+  .hero .tag{margin:22px auto 0;max-width:620px;font-size:clamp(1rem,2.2vw,1.25rem);font-weight:300;text-shadow:0 2px 14px rgba(0,0,0,.6)}
+  .hero .pill{display:inline-block;margin-top:30px;padding:12px 30px;border-radius:50px;background:#fff;color:var(--orange-dark);font-weight:700;text-decoration:none;box-shadow:var(--shadow);transition:.3s}
+  .hero .pill:hover{transform:translateY(-4px) scale(1.03);background:var(--orange);color:#fff}
+  .scrolldown{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;color:#fff;font-size:1.6rem;animation:bob 1.6s infinite}
+  @keyframes bob{50%{transform:translate(-50%,10px)}}
+
+  /* ---------- SECTION HEADINGS ---------- */
+  .head{text-align:center;max-width:720px;margin:0 auto 50px}
+  .head .eyebrow{color:var(--orange);font-weight:700;letter-spacing:3px;text-transform:uppercase;font-size:.8rem}
+  .head h2{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:800;margin:10px 0 14px;line-height:1.2}
+  .head p{color:var(--muted);font-size:1.05rem}
+  .pad{padding:clamp(70px,10vw,120px) 0}
+
+  /* ---------- STORY ---------- */
+  .story-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+  @media(max-width:860px){.story-grid{grid-template-columns:1fr;gap:34px}}
+  .story-text h2{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800;margin-bottom:18px;line-height:1.25}
+  .story-text h2 em{color:var(--orange);font-style:normal}
+  .story-text p{color:var(--muted);margin-bottom:16px}
+  .story-img{position:relative}
+  .story-img img{border-radius:var(--radius);box-shadow:var(--shadow);width:100%;aspect-ratio:4/3;object-fit:cover}
+  .story-img .badge{
+    position:absolute;bottom:-22px;right:-10px;background:var(--orange);color:#fff;
+    border-radius:18px;padding:14px 22px;font-weight:800;text-align:center;box-shadow:var(--shadow);
+  }
+  .story-img .badge span{display:block;font-size:1.8rem;line-height:1}
+  .story-img .badge small{font-weight:500;opacity:.9}
+
+  /* ---------- MOTTO ---------- */
+  .motto{
+    color:#fff;text-align:center;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,var(--orange-dark),var(--orange) 55%,var(--orange-light));
+  }
+  .motto::before,.motto::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}
+  .motto::before{width:340px;height:340px;top:-120px;left:-100px}
+  .motto::after{width:280px;height:280px;bottom:-120px;right:-80px}
+  .motto-quote{
+    position:relative;z-index:2;max-width:920px;margin:0 auto;
+    font-size:clamp(1.3rem,3.2vw,2.1rem);font-weight:600;line-height:1.55;
+    text-shadow:0 3px 18px rgba(0,0,0,.18);
+  }
+  .motto-quote b{font-weight:800;color:#fff;border-bottom:3px solid rgba(255,255,255,.5)}
+  .motto-nums{
+    position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:22px;justify-content:center;margin-top:46px;
+  }
+  .motto-nums .mn{
+    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
+    border-radius:20px;padding:24px 30px;min-width:200px;backdrop-filter:blur(4px);transition:.3s;
+  }
+  .motto-nums .mn:hover{transform:translateY(-6px);background:rgba(255,255,255,.22)}
+  .motto-nums .mn span{display:block;font-size:3rem;font-weight:800;line-height:1}
+  .motto-nums .mn small{display:block;margin-top:8px;font-weight:400;opacity:.95}
+
+  /* ---------- STATS ---------- */
+  .stats{background:linear-gradient(135deg,var(--orange),var(--orange-light));color:#fff}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+  @media(max-width:760px){.stats-grid{grid-template-columns:repeat(2,1fr);gap:34px}}
+  .stat .num{font-size:clamp(2.2rem,6vw,3.4rem);font-weight:800;line-height:1}
+  .stat .lbl{font-weight:300;opacity:.95;margin-top:6px}
+
+  /* ---------- VALUES ---------- */
+  .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  @media(max-width:860px){.values-grid{grid-template-columns:1fr}}
+  .vcard{background:#fff;border-radius:var(--radius);padding:34px 28px;box-shadow:0 12px 34px rgba(226,82,26,.10);border:1px solid rgba(242,101,34,.08);transition:.35s}
+  .vcard:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+  .vcard .ic{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;font-size:1.8rem;background:var(--cream);margin-bottom:18px}
+  .vcard h3{font-size:1.25rem;font-weight:700;margin-bottom:10px}
+  .vcard p{color:var(--muted);font-size:.98rem}
+
+  /* ---------- GALLERY ---------- */
+  .gallery{columns:4 240px;column-gap:16px}
+  .gallery figure{break-inside:avoid;margin:0 0 16px;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(226,82,26,.12);cursor:pointer;position:relative}
+  .gallery img{width:100%;transition:.5s ease;display:block}
+  .gallery figure:hover img{transform:scale(1.07)}
+  .gallery figure::after{content:"🔍";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:1.6rem;background:rgba(226,82,26,.0);opacity:0;transition:.35s}
+  .gallery figure:hover::after{background:rgba(226,82,26,.35);opacity:1}
+
+  /* ---------- VIDEO ---------- */
+  .video-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+  .video-wrap video{width:100%;border-radius:var(--radius);box-shadow:var(--shadow);background:#000;aspect-ratio:16/9;object-fit:cover}
+  .video-empty{
+    grid-column:1/-1;text-align:center;border:2px dashed rgba(242,101,34,.4);
+    border-radius:var(--radius);padding:54px 24px;background:#fff;color:var(--muted);
+  }
+  .video-empty .big{font-size:2.6rem;margin-bottom:12px}
+  .video-empty code{background:var(--cream);padding:3px 10px;border-radius:8px;color:var(--orange-dark);font-weight:600}
+
+  /* ---------- MEMBERS ---------- */
+  .members{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:920px;margin:0 auto}
+  .members span{background:#fff;border:1px solid rgba(242,101,34,.18);color:var(--ink);padding:9px 18px;border-radius:50px;font-weight:500;font-size:.95rem;box-shadow:0 4px 14px rgba(226,82,26,.07);transition:.25s}
+  .members span:hover{background:var(--orange);color:#fff;transform:translateY(-3px)}
+  .gkc-title{text-align:center;margin:46px 0 22px;font-size:1.3rem;font-weight:800;color:var(--orange-dark)}
+  .members.gkc span{background:linear-gradient(135deg,var(--orange),var(--orange-light));color:#fff;border:none;font-weight:600;box-shadow:0 6px 18px rgba(226,82,26,.22)}
+  .members.gkc span:hover{transform:translateY(-3px) scale(1.04);background:var(--orange-dark)}
+
+  /* ---------- QUOTE ---------- */
+  .quote{
+    text-align:center;color:#fff;position:relative;overflow:hidden;
+    background:linear-gradient(180deg,rgba(44,33,24,.7),rgba(226,82,26,.75)),
+      url("z7934410001625_16aae39d05c3d00e03bdc613fa2b5677.jpg") center/cover fixed;
+  }
+  .quote blockquote{font-family:'Pacifico',cursive;font-size:clamp(1.6rem,4.5vw,3rem);line-height:1.4;max-width:880px;margin:0 auto;text-shadow:0 4px 24px rgba(0,0,0,.4)}
+  .quote .by{margin-top:24px;font-weight:300;letter-spacing:2px;opacity:.9}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:#f6e9df;text-align:center;padding:54px 20px 40px}
+  footer img{width:84px;margin:0 auto 18px;filter:drop-shadow(0 6px 16px rgba(0,0,0,.5))}
+  footer h3{font-size:1.5rem;font-weight:800}
+  footer p{opacity:.7;margin-top:10px;font-size:.92rem}
+  footer .heart{color:var(--orange-light)}
+
+  /* ---------- REVEAL ANIM ---------- */
+  .reveal{opacity:0;transform:translateY(40px);transition:.8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- LIGHTBOX ---------- */
+  .lb{position:fixed;inset:0;z-index:100;background:rgba(20,12,6,.92);display:none;align-items:center;justify-content:center;padding:30px}
+  .lb.open{display:flex}
+  .lb img{max-width:92vw;max-height:88vh;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+  .lb .x{position:absolute;top:22px;right:30px;color:#fff;font-size:2.4rem;cursor:pointer;line-height:1}
+  .lb .nav{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2.6rem;cursor:pointer;padding:10px 18px;user-select:none;opacity:.8}
+  .lb .nav:hover{opacity:1}
+  .lb .prev{left:10px}.lb .next{right:10px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="brand"><img src="z7934497619547_6f23dc38b85cc9c8e1e746c7857df694.jpg" alt="Logo Nhà 319"><span>Nhà 319</span></div>
+  <div class="links">
+    <a href="#story">Câu chuyện</a>
+    <a href="#motto">Phương châm</a>
+    <a href="#values">Giá trị</a>
+    <a href="#gallery">Khoảnh khắc</a>
+    <a href="#video">Video</a>
+    <a href="#members">Thành viên</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <img class="hero-logo" src="z7934497619547_6f23dc38b85cc9c8e1e746c7857df694.jpg" alt="Logo Nhà 319 - WIT Home - Mentor WiT">
+    <h1><span class="script">Chào mừng đến với</span>Nhà 319</h1>
+    <p class="tag">Hơn <strong>8 tháng</strong> đồng hành, yêu thương và chứa đựng nhau — cùng nhau hoàn thành hành trình <strong>Mentor WiT K07</strong>.</p>
+    <a href="#gallery" class="pill">Xem những khoảnh khắc ❤️</a>
+  </div>
+  <a href="#story" class="scrolldown" aria-label="Cuộn xuống">⌄</a>
+</header>
+
+<!-- STORY -->
+<section class="pad" id="story">
+  <div class="wrap story-grid">
+    <div class="story-text reveal">
+      <span style="color:var(--orange);font-weight:700;letter-spacing:3px;text-transform:uppercase;font-size:.8rem">Câu chuyện của chúng mình</span>
+      <h2>Một ngôi nhà nhỏ <em>mang tên 319</em></h2>
+      <p>Có những người xa lạ, từ nhiều miền đất khác nhau, vô tình gặp gỡ rồi trở thành một gia đình. Đó là <strong>Nhà 319</strong> — nơi mỗi thành viên đều được lắng nghe, được sẻ chia và được là chính mình.</p>
+      <p>Suốt hơn 8 tháng của chương trình <strong>Mentor WiT K07</strong>, chúng mình đã cùng nhau học tập, cùng vượt qua những đêm deadline, cùng cười, cùng khóc, và cùng lớn lên. Mỗi buổi học online, mỗi lần gặp mặt, mỗi chiếc bánh sinh nhật… đều trở thành kỷ niệm không thể nào quên.</p>
+      <p>319 không chỉ là một con số — đó là <em style="color:var(--orange);font-style:normal;font-weight:700">yêu thương, là sự chứa đựng và là nhà</em>.</p>
+    </div>
+    <div class="story-img reveal">
+      <img src="z7934405818523_4907ce55339c419377a2cbef235eb9d6.jpg" alt="Thành viên Nhà 319">
+      <div class="badge"><span>8+</span><small>tháng đồng hành</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- MOTTO / PHƯƠNG CHÂM -->
+<section class="motto pad" id="motto">
+  <div class="wrap reveal">
+    <div class="head" style="margin-bottom:38px">
+      <span class="eyebrow" style="color:#ffe2cf">Kim chỉ nam của cả nhà</span>
+      <h2 style="color:#fff">Phương châm Nhà 319</h2>
+    </div>
+    <p class="motto-quote">
+      “Đạt được <b>7 sự giàu toàn diện</b>, trở thành <b>9 dạng người trong 1</b>,
+      mỗi cá nhân đều hướng đến <b>làm giàu, làm chủ, trở nên và trở thành</b>.”
+    </p>
+    <div class="motto-nums">
+      <div class="mn"><span>7</span><small>sự giàu toàn diện</small></div>
+      <div class="mn"><span>9</span><small>dạng người trong 1</small></div>
+      <div class="mn"><span>4</span><small>làm giàu · làm chủ · trở nên · trở thành</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats pad">
+  <div class="wrap stats-grid">
+    <div class="stat reveal"><div class="num">319</div><div class="lbl">Ngôi nhà yêu thương</div></div>
+    <div class="stat reveal"><div class="num">8+</div><div class="lbl">Tháng đồng hành</div></div>
+    <div class="stat reveal"><div class="num">K07</div><div class="lbl">Mentor WiT</div></div>
+    <div class="stat reveal"><div class="num">∞</div><div class="lbl">Kỷ niệm đáng nhớ</div></div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="pad" id="values">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Điều làm nên Nhà 319</span>
+      <h2>Yêu thương · Chứa đựng · Đồng hành</h2>
+      <p>Ba điều giản dị nhưng đủ để giữ một ngôi nhà ấm áp suốt cả hành trình.</p>
+    </div>
+    <div class="values-grid">
+      <div class="vcard reveal"><div class="ic">❤️</div><h3>Yêu thương</h3><p>Mỗi thành viên đều được quan tâm chân thành. Một lời hỏi thăm, một cái ôm, một chiếc bánh sinh nhật — yêu thương ở 319 luôn đong đầy.</p></div>
+      <div class="vcard reveal"><div class="ic">🤝</div><h3>Chứa đựng</h3><p>Ở đây không ai bị bỏ lại. Chúng mình lắng nghe, bao dung và đón nhận nhau với tất cả những điểm mạnh và cả những điều chưa hoàn hảo.</p></div>
+      <div class="vcard reveal"><div class="ic">🌱</div><h3>Đồng hành</h3><p>Cùng nhau học, cùng nhau tiến bộ. Hơn 8 tháng Mentor WiT K07 là minh chứng cho sức mạnh của sự gắn kết và đồng hành bền bỉ.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="pad" id="gallery" style="background:linear-gradient(180deg,#fff,var(--cream))">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Album kỷ niệm</span>
+      <h2>Những khoảnh khắc đáng nhớ</h2>
+      <p>Nhấp vào từng tấm ảnh để xem lại trọn vẹn một mảnh ký ức của Nhà 319.</p>
+    </div>
+    <div class="gallery reveal" id="gallery-grid"><!-- JS sẽ chèn ảnh vào đây --></div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="pad" id="video">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Thước phim ký ức</span>
+      <h2>Video của Nhà 319</h2>
+      <p>Những đoạn phim ghi lại tiếng cười và khoảnh khắc sống động nhất của cả nhà.</p>
+    </div>
+    <div class="video-wrap reveal" id="video-wrap"><!-- JS chèn video --></div>
+  </div>
+</section>
+
+<!-- MEMBERS -->
+<section class="pad" id="members" style="background:linear-gradient(180deg,var(--cream),#fff)">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Gia đình 319</span>
+      <h2>Những con người làm nên ngôi nhà</h2>
+      <p>Cảm ơn mỗi thành viên đã cùng nhau viết nên câu chuyện này.</p>
+    </div>
+    <div class="members reveal" id="members-list"></div>
+
+    <h3 class="gkc-title reveal">🎓 GKC Nhà 319</h3>
+    <div class="members gkc reveal" id="gkc-list"></div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote pad">
+  <div class="wrap reveal">
+    <blockquote>"Gặp nhau là duyên, ở lại với nhau là thương — 319 mãi là nhà."</blockquote>
+    <div class="by">— Nhà 319 · Mentor WiT K07 —</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="z7934497619547_6f23dc38b85cc9c8e1e746c7857df694.jpg" alt="Logo Nhà 319">
+  <h3>Nhà 319 · Mentor WiT K07</h3>
+  <p>Lưu giữ những khoảnh khắc yêu thương sau hơn 8 tháng đồng hành.</p>
+  <p>Made with <span class="heart">❤</span> by Nhà 319 · 2026</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <span class="x" id="lb-x">×</span>
+  <span class="nav prev" id="lb-prev">‹</span>
+  <img id="lb-img" src="" alt="Ảnh Nhà 319">
+  <span class="nav next" id="lb-next">›</span>
+</div>
+
+<script>
+/* ----- Danh sách ảnh ----- */
+const images = [
+ "z7910887031849_9cbb4663c7e015f66df02e5bf20057b2.jpg",
+ "z7934406701542_529bb46c9e76b143d8480701c8bcba6f.jpg",
+ "z7934405818523_4907ce55339c419377a2cbef235eb9d6.jpg",
+ "z7934410001625_16aae39d05c3d00e03bdc613fa2b5677.jpg",
+ "z7934599962017_cf05ee3499474889e0b25146519c066c.jpg",
+ "z7934396309423_97499f9d10228cde8a872823610f4a13.jpg",
+ "z7934397809227_670051ba04d834e19d7b2dc60181182c.jpg",
+ "z7934400007053_44f866d58e253e31854b1da2471754c6.jpg",
+ "z7934400578352_d08e41640ee880224f72580ac1cfb9e8.jpg",
+ "z7934401177596_56b6a65c67dfa566ce00e1521b308a07.jpg",
+ "z7934402113001_5e7076eb40674953fa5c2b81338389ae.jpg",
+ "z7934402470688_b0d12bdbfd2beb6effecdc71ab5c5ce4.jpg",
+ "z7934403161410_49cc224521957b460b52a33ee5e63872.jpg",
+ "z7934403537501_01ad06adc20011c7d6bc6a216ff9c6ef.jpg",
+ "z7934403891433_8cb3c652fabf0a0085323852b7b2860f.jpg",
+ "z7934404525684_4deb72eb90ae6102de09b9a3be651511.jpg",
+ "z7934405258023_2e178bf9b5a5b5e1621ca48684b61cbf.jpg",
+ "z7934407191187_883a268fbebe5c84091fd1c0868e208c.jpg",
+ "z7934407786730_15930902e80169ed2d4f5443c2934bb0.jpg",
+ "z7934409424634_0cf99028d82b7c7b7ed5ed60487c9d0e.jpg",
+ "z7934493744980_0295f1e8156e270d233a68c1933df32f.jpg",
+ "z7934494450655_4420ef60522feab28e110845d70ae4ca.jpg",
+ "z7934495362829_0fb0407c42745724e848ffdc5c6cb66b.jpg",
+ "z7934496491775_07288435a09e8bd86634802a55a672da.jpg",
+ "z7934499508067_d3b0f2beee0899d94f6190d16a4c0d0c.jpg",
+ "z7934502570368_f9015e24fd87dddf3ac9acd7b8dbe1bb.jpg",
+ "z7934596267498_d4856b19405101bd58f7a656624f4b68.jpg",
+ "z7934597919321_5d71b47e8cc19d0345ef61eb1732f5ab.jpg",
+ "z7934598464459_a93a60dfe0aa17483caea6e382ad6d5e.jpg",
+ "z7934600467088_d51f561708954249fd10836781a2c6c4.jpg",
+ "z7934601282100_938373934574220ee590f8187f3fc6ea.jpg",
+ "z7934601733260_8d6087bf9dfd63a860e47474022bef6a.jpg",
+ "z7934602887325_3abced634a3c65fdd51c26f5953f2cf9.jpg",
+ "z7934603877565_e063bdb872e6dce7ae43896ab084ec76.jpg",
+ "z7934605158950_d2023046e1c0f103479ae8214edb5917.jpg",
+ "z7934605577547_0d1637f4ba2c1011bc1855e2d37640e6.jpg",
+ "z7934606080767_9951f0a5ba42cd3050117edb2120e9a9.jpg",
+ "z7934606641849_148147ef037ecc56425036220f0c2955.jpg",
+ "z7934607258267_b424dfe89510d4d9dfea89446a89de88.jpg"
+];
+
+/* ----- Video: thả file .mp4 vào thư mục /Video rồi thêm tên vào mảng dưới ----- */
+const videos = [
+ "Video/VIDEO-319-web.mp4"
+];
+
+/* ----- Thành viên ----- */
+const members = [
+ "Bùi Kim Ngân","Nguyễn Hồ An","Nguyễn Quang Vinh","Nguyễn Thị Trâm","Mary Ann Phạm",
+ "Phạm Thị Mỹ Anh","Hoàng Thu Hà","Trần Ngọc Hường","Jessica Nguyễn","Văn Thị Dần",
+ "Đỗ Thị Thanh Thảo","Trần Thị Việt Anh","Phạm Thị Thanh Nga","Nguyễn Thị Thu Hằng","Trần Đăng Minh"
+];
+
+/* ----- Render gallery ----- */
+const gg = document.getElementById('gallery-grid');
+images.forEach((src,i)=>{
+  const f=document.createElement('figure');
+  f.innerHTML=`<img src="${src}" alt="Khoảnh khắc Nhà 319" loading="lazy" data-i="${i}">`;
+  gg.appendChild(f);
+});
+
+/* ----- Render video ----- */
+const vw=document.getElementById('video-wrap');
+if(videos.length){
+  videos.forEach(src=>{
+    const fig=document.createElement('figure');
+    fig.style.cssText="margin:0;background:#000;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)";
+    const v=document.createElement('video');
+    v.controls=true;v.preload="metadata";v.playsInline=true;
+    v.style.cssText="width:100%;display:block;aspect-ratio:16/9;background:#000;object-fit:contain";
+    v.innerHTML=`<source src="${src}">Trình duyệt của bạn không phát được video này. <a href="${src}" download style="color:#ffd9bf">Tải video về</a>.`;
+    fig.appendChild(v);
+    vw.appendChild(fig);
+  });
+}else{
+  vw.innerHTML=`<div class="video-empty">
+    <div class="big">🎬</div>
+    <strong>Khu vực video đã sẵn sàng!</strong>
+    <p style="margin-top:8px">Hãy thả các file video (<code>.mp4</code>) vào thư mục <code>Video/</code>,
+    sau đó thêm tên file vào mảng <code>videos</code> trong mã nguồn — video sẽ tự hiện ở đây.</p>
+  </div>`;
+}
+
+/* ----- Render members ----- */
+const ml=document.getElementById('members-list');
+members.forEach(n=>{const s=document.createElement('span');s.textContent="💛 "+n;ml.appendChild(s)});
+
+const gkc=["Thầy Hín Tắc Phí","Cô Lại Khánh Trâm","Cô Kiều My"];
+const gl=document.getElementById('gkc-list');
+gkc.forEach(n=>{const s=document.createElement('span');s.textContent="🎓 "+n;gl.appendChild(s)});
+
+/* ----- Lightbox ----- */
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lb-img');
+let cur=0;
+function openLb(i){cur=i;lbImg.src=images[i];lb.classList.add('open')}
+function move(d){cur=(cur+d+images.length)%images.length;lbImg.src=images[cur]}
+gg.addEventListener('click',e=>{const t=e.target.closest('img');if(t)openLb(+t.dataset.i)});
+document.getElementById('lb-x').onclick=()=>lb.classList.remove('open');
+document.getElementById('lb-prev').onclick=()=>move(-1);
+document.getElementById('lb-next').onclick=()=>move(1);
+lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('open')});
+document.addEventListener('keydown',e=>{
+  if(!lb.classList.contains('open'))return;
+  if(e.key==='Escape')lb.classList.remove('open');
+  if(e.key==='ArrowLeft')move(-1);
+  if(e.key==='ArrowRight')move(1);
+});
+
+/* ----- Nav scroll & reveal ----- */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
