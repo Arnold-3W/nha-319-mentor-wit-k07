@@ -153,6 +153,23 @@
   .gallery figure:hover img{transform:scale(1.07)}
   .gallery figure::after{content:"🔍";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:1.6rem;background:rgba(226,82,26,.0);opacity:0;transition:.35s}
   .gallery figure:hover::after{background:rgba(226,82,26,.35);opacity:1}
+  /* Bộ lọc chủ đề */
+  .gallery-filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:44px}
+  .gallery-filters button{
+    font-family:inherit;cursor:pointer;border:1px solid rgba(242,101,34,.28);background:#fff;color:var(--ink);
+    padding:9px 18px;border-radius:50px;font-weight:600;font-size:.92rem;transition:.25s;box-shadow:0 4px 14px rgba(226,82,26,.07);
+  }
+  .gallery-filters button:hover{transform:translateY(-2px);border-color:var(--orange)}
+  .gallery-filters button.active{background:linear-gradient(135deg,var(--orange),var(--orange-light));color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(226,82,26,.25)}
+  .gallery-filters button .ct{opacity:.7;font-weight:500;margin-left:4px}
+  .gallery-filters button.active .ct{opacity:.9}
+  /* Nhóm chủ đề */
+  .gcat{margin-bottom:54px}
+  .gcat:last-child{margin-bottom:0}
+  .gcat-title{display:flex;align-items:center;gap:12px;margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid rgba(242,101,34,.15)}
+  .gcat-title .ic{font-size:1.6rem}
+  .gcat-title h3{font-size:clamp(1.2rem,2.6vw,1.6rem);font-weight:800;color:var(--ink)}
+  .gcat-title .count{margin-left:auto;background:var(--cream);color:var(--orange-dark);font-weight:700;font-size:.82rem;padding:4px 12px;border-radius:50px}
 
   /* ---------- VIDEO ---------- */
   .video-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
@@ -295,9 +312,10 @@
     <div class="head reveal">
       <span class="eyebrow">Album kỷ niệm</span>
       <h2>Những khoảnh khắc đáng nhớ</h2>
-      <p>Nhấp vào từng tấm ảnh để xem lại trọn vẹn một mảnh ký ức của Nhà 319.</p>
+      <p>Được sắp xếp theo từng chủ đề — chọn một chủ đề để xem nhanh hơn, hoặc nhấp vào ảnh để xem lớn.</p>
     </div>
-    <div class="gallery reveal" id="gallery-grid"><!-- JS sẽ chèn ảnh vào đây --></div>
+    <div class="gallery-filters reveal" id="gallery-filters"><!-- JS chèn chip lọc --></div>
+    <div id="gallery-groups"><!-- JS chèn các nhóm ảnh theo chủ đề --></div>
   </div>
 </section>
 
@@ -354,52 +372,66 @@
 
 <script>
 /* ----- Danh sách ảnh ----- */
-const images = [
- "saigon-150626/z7936190580216_358799d683c1c8725530131acbc4d2f1.jpg",
- "saigon-150626/z7936034986616_e07d410165397b62d1b77644d321d160.jpg",
- "saigon-150626/z7935904730716_720d10e60969e95117b4469f0f9affdd.jpg",
- "saigon-150626/z7936169153469_fce45aaa89eb6aa3c5b8aa22b43c8dcd.jpg",
- "saigon-150626/z7935816404366_a0a18a69024882fd3c9ff55a1f9b6c36.jpg",
- "Photos/z7910887031849_9cbb4663c7e015f66df02e5bf20057b2.jpg",
- "Photos/z7934406701542_529bb46c9e76b143d8480701c8bcba6f.jpg",
- "Photos/z7934405818523_4907ce55339c419377a2cbef235eb9d6.jpg",
- "Photos/z7934410001625_16aae39d05c3d00e03bdc613fa2b5677.jpg",
- "Photos/z7934599962017_cf05ee3499474889e0b25146519c066c.jpg",
- "Photos/z7934396309423_97499f9d10228cde8a872823610f4a13.jpg",
- "Photos/z7934397809227_670051ba04d834e19d7b2dc60181182c.jpg",
- "Photos/z7934400007053_44f866d58e253e31854b1da2471754c6.jpg",
- "Photos/z7934400578352_d08e41640ee880224f72580ac1cfb9e8.jpg",
- "Photos/z7934401177596_56b6a65c67dfa566ce00e1521b308a07.jpg",
- "Photos/z7934402113001_5e7076eb40674953fa5c2b81338389ae.jpg",
- "Photos/z7934402470688_b0d12bdbfd2beb6effecdc71ab5c5ce4.jpg",
- "Photos/z7934403161410_49cc224521957b460b52a33ee5e63872.jpg",
- "Photos/z7934403537501_01ad06adc20011c7d6bc6a216ff9c6ef.jpg",
- "Photos/z7934403891433_8cb3c652fabf0a0085323852b7b2860f.jpg",
- "Photos/z7934404525684_4deb72eb90ae6102de09b9a3be651511.jpg",
- "Photos/z7934405258023_2e178bf9b5a5b5e1621ca48684b61cbf.jpg",
- "Photos/z7934407191187_883a268fbebe5c84091fd1c0868e208c.jpg",
- "Photos/z7934407786730_15930902e80169ed2d4f5443c2934bb0.jpg",
- "Photos/z7934409424634_0cf99028d82b7c7b7ed5ed60487c9d0e.jpg",
- "Photos/z7934493744980_0295f1e8156e270d233a68c1933df32f.jpg",
- "Photos/z7934494450655_4420ef60522feab28e110845d70ae4ca.jpg",
- "Photos/z7934495362829_0fb0407c42745724e848ffdc5c6cb66b.jpg",
- "Photos/z7934496491775_07288435a09e8bd86634802a55a672da.jpg",
- "Photos/z7934499508067_d3b0f2beee0899d94f6190d16a4c0d0c.jpg",
- "Photos/z7934502570368_f9015e24fd87dddf3ac9acd7b8dbe1bb.jpg",
- "Photos/z7934596267498_d4856b19405101bd58f7a656624f4b68.jpg",
- "Photos/z7934597919321_5d71b47e8cc19d0345ef61eb1732f5ab.jpg",
- "Photos/z7934598464459_a93a60dfe0aa17483caea6e382ad6d5e.jpg",
- "Photos/z7934600467088_d51f561708954249fd10836781a2c6c4.jpg",
- "Photos/z7934601282100_938373934574220ee590f8187f3fc6ea.jpg",
- "Photos/z7934601733260_8d6087bf9dfd63a860e47474022bef6a.jpg",
- "Photos/z7934602887325_3abced634a3c65fdd51c26f5953f2cf9.jpg",
- "Photos/z7934603877565_e063bdb872e6dce7ae43896ab084ec76.jpg",
- "Photos/z7934605158950_d2023046e1c0f103479ae8214edb5917.jpg",
- "Photos/z7934605577547_0d1637f4ba2c1011bc1855e2d37640e6.jpg",
- "Photos/z7934606080767_9951f0a5ba42cd3050117edb2120e9a9.jpg",
- "Photos/z7934606641849_148147ef037ecc56425036220f0c2955.jpg",
- "Photos/z7934607258267_b424dfe89510d4d9dfea89446a89de88.jpg"
+const galleryGroups = [
+ { id:"khaigiang", icon:"🎬", title:"Khai giảng Mentor WiT K07", items:[
+   "Photos/z7934502570368_f9015e24fd87dddf3ac9acd7b8dbe1bb.jpg",
+   "Photos/z7934596267498_d4856b19405101bd58f7a656624f4b68.jpg"
+ ]},
+ { id:"hoconline", icon:"🎓", title:"Học online & Kỳ thi cuối khóa", items:[
+   "Photos/z7934496491775_07288435a09e8bd86634802a55a672da.jpg",
+   "Photos/z7934410001625_16aae39d05c3d00e03bdc613fa2b5677.jpg",
+   "Photos/z7934409424634_0cf99028d82b7c7b7ed5ed60487c9d0e.jpg",
+   "Photos/z7934493744980_0295f1e8156e270d233a68c1933df32f.jpg",
+   "Photos/z7934494450655_4420ef60522feab28e110845d70ae4ca.jpg",
+   "Photos/z7934397809227_670051ba04d834e19d7b2dc60181182c.jpg",
+   "Photos/z7934602887325_3abced634a3c65fdd51c26f5953f2cf9.jpg",
+   "Photos/z7934400007053_44f866d58e253e31854b1da2471754c6.jpg",
+   "Photos/z7934402113001_5e7076eb40674953fa5c2b81338389ae.jpg",
+   "Photos/z7934402470688_b0d12bdbfd2beb6effecdc71ab5c5ce4.jpg",
+   "Photos/z7934403161410_49cc224521957b460b52a33ee5e63872.jpg",
+   "Photos/z7934403537501_01ad06adc20011c7d6bc6a216ff9c6ef.jpg",
+   "Photos/z7934404525684_4deb72eb90ae6102de09b9a3be651511.jpg",
+   "Photos/z7934401177596_56b6a65c67dfa566ce00e1521b308a07.jpg",
+   "Photos/z7934403891433_8cb3c652fabf0a0085323852b7b2860f.jpg",
+   "Photos/z7934405258023_2e178bf9b5a5b5e1621ca48684b61cbf.jpg",
+   "Photos/z7934495362829_0fb0407c42745724e848ffdc5c6cb66b.jpg",
+   "Photos/z7934400578352_d08e41640ee880224f72580ac1cfb9e8.jpg"
+ ]},
+ { id:"gapgo", icon:"🤝", title:"Gặp gỡ & họp mặt", items:[
+   "Photos/z7934606080767_9951f0a5ba42cd3050117edb2120e9a9.jpg",
+   "Photos/z7934607258267_b424dfe89510d4d9dfea89446a89de88.jpg",
+   "Photos/z7934606641849_148147ef037ecc56425036220f0c2955.jpg",
+   "Photos/z7934605577547_0d1637f4ba2c1011bc1855e2d37640e6.jpg",
+   "Photos/z7934601282100_938373934574220ee590f8187f3fc6ea.jpg",
+   "Photos/z7934499508067_d3b0f2beee0899d94f6190d16a4c0d0c.jpg",
+   "Photos/z7934407786730_15930902e80169ed2d4f5443c2934bb0.jpg",
+   "Photos/z7934396309423_97499f9d10228cde8a872823610f4a13.jpg",
+   "Photos/z7910887031849_9cbb4663c7e015f66df02e5bf20057b2.jpg",
+   "Photos/z7934598464459_a93a60dfe0aa17483caea6e382ad6d5e.jpg",
+   "Photos/z7934601733260_8d6087bf9dfd63a860e47474022bef6a.jpg",
+   "Photos/z7934603877565_e063bdb872e6dce7ae43896ab084ec76.jpg"
+ ]},
+ { id:"saigon", icon:"🌆", title:"Hội ngộ Sài Gòn · 15.06.2026", items:[
+   "saigon-150626/z7936190580216_358799d683c1c8725530131acbc4d2f1.jpg",
+   "saigon-150626/z7936034986616_e07d410165397b62d1b77644d321d160.jpg",
+   "saigon-150626/z7935904730716_720d10e60969e95117b4469f0f9affdd.jpg",
+   "saigon-150626/z7936169153469_fce45aaa89eb6aa3c5b8aa22b43c8dcd.jpg",
+   "saigon-150626/z7935816404366_a0a18a69024882fd3c9ff55a1f9b6c36.jpg"
+ ]},
+ { id:"sukien", icon:"🎉", title:"Sự kiện & cộng đồng WiT", items:[
+   "Photos/z7934406701542_529bb46c9e76b143d8480701c8bcba6f.jpg",
+   "Photos/z7934597919321_5d71b47e8cc19d0345ef61eb1732f5ab.jpg",
+   "Photos/z7934407191187_883a268fbebe5c84091fd1c0868e208c.jpg",
+   "Photos/z7934405818523_4907ce55339c419377a2cbef235eb9d6.jpg",
+   "Photos/z7934605158950_d2023046e1c0f103479ae8214edb5917.jpg"
+ ]},
+ { id:"doithuong", icon:"💐", title:"Khoảnh khắc đời thường & chúc mừng", items:[
+   "Photos/z7934599962017_cf05ee3499474889e0b25146519c066c.jpg",
+   "Photos/z7934600467088_d51f561708954249fd10836781a2c6c4.jpg"
+ ]}
 ];
+/* Mảng phẳng phục vụ xem ảnh lớn (lightbox) — theo đúng thứ tự hiển thị */
+const images = galleryGroups.flatMap(g=>g.items);
 
 /* ----- Video: thả file .mp4 vào thư mục /Video rồi thêm tên vào mảng dưới ----- */
 const videos = [
@@ -413,12 +445,40 @@ const members = [
  "Đỗ Thị Thanh Thảo","Trần Thị Việt Anh","Phạm Thị Thanh Nga","Nguyễn Thị Thu Hằng","Trần Đăng Minh"
 ];
 
-/* ----- Render gallery ----- */
-const gg = document.getElementById('gallery-grid');
-images.forEach((src,i)=>{
-  const f=document.createElement('figure');
-  f.innerHTML=`<img src="${src}" alt="Khoảnh khắc Nhà 319" loading="lazy" data-i="${i}">`;
-  gg.appendChild(f);
+/* ----- Render gallery theo chủ đề ----- */
+const groupsWrap=document.getElementById('gallery-groups');
+const filtersWrap=document.getElementById('gallery-filters');
+let flatIndex=0;
+galleryGroups.forEach(g=>{
+  const cat=document.createElement('div');
+  cat.className='gcat';cat.dataset.cat=g.id;
+  cat.innerHTML=`<div class="gcat-title"><span class="ic">${g.icon}</span><h3>${g.title}</h3><span class="count">${g.items.length} ảnh</span></div>`;
+  const grid=document.createElement('div');grid.className='gallery';
+  g.items.forEach(src=>{
+    const f=document.createElement('figure');
+    f.innerHTML=`<img src="${src}" alt="${g.title} — Nhà 319" loading="lazy" data-i="${flatIndex}">`;
+    grid.appendChild(f);flatIndex++;
+  });
+  cat.appendChild(grid);
+  groupsWrap.appendChild(cat);
+});
+
+/* ----- Bộ lọc chủ đề ----- */
+const filters=[{id:'all',icon:'🗂️',title:'Tất cả'}].concat(galleryGroups.map(g=>({id:g.id,icon:g.icon,title:g.title})));
+filters.forEach(ft=>{
+  const b=document.createElement('button');
+  const n=ft.id==='all'?images.length:galleryGroups.find(g=>g.id===ft.id).items.length;
+  b.innerHTML=`${ft.icon} ${ft.title}<span class="ct">${n}</span>`;
+  b.dataset.cat=ft.id;
+  if(ft.id==='all')b.classList.add('active');
+  b.onclick=()=>{
+    filtersWrap.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    groupsWrap.querySelectorAll('.gcat').forEach(c=>{
+      c.style.display=(ft.id==='all'||c.dataset.cat===ft.id)?'':'none';
+    });
+  };
+  filtersWrap.appendChild(b);
 });
 
 /* ----- Render video ----- */
@@ -456,7 +516,7 @@ const lb=document.getElementById('lb'),lbImg=document.getElementById('lb-img');
 let cur=0;
 function openLb(i){cur=i;lbImg.src=images[i];lb.classList.add('open')}
 function move(d){cur=(cur+d+images.length)%images.length;lbImg.src=images[cur]}
-gg.addEventListener('click',e=>{const t=e.target.closest('img');if(t)openLb(+t.dataset.i)});
+groupsWrap.addEventListener('click',e=>{const t=e.target.closest('img');if(t)openLb(+t.dataset.i)});
 document.getElementById('lb-x').onclick=()=>lb.classList.remove('open');
 document.getElementById('lb-prev').onclick=()=>move(-1);
 document.getElementById('lb-next').onclick=()=>move(1);
