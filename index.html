@@ -656,6 +656,7 @@ const videoGroups = [
  ]}
 ];
 const videos = videoGroups.flatMap(g=>g.items);
+const posters = new Set(["1783659472686", "1783659483524", "1783661437464", "1783661437469", "1783675328107", "1783695719758", "1783732090799", "1783732090804", "1783746521614", "1783752691017", "1783785384684", "1783815294868", "1783848458902", "1783853563112", "1783860808279", "1783915786947", "1783915805456", "1783915909771", "1783916012476", "1783916123636", "1783921693831", "1783948860036", "1783948860049", "1784038897860", "1784176687647"]);
 
 /* ----- Thành viên ----- */
 const members = [
@@ -712,7 +713,9 @@ if(videos.length){
       const fig=document.createElement('figure');
       fig.style.cssText="margin:0;background:#000;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)";
       const v=document.createElement('video');
-      v.controls=true;v.preload="none";v.playsInline=true;
+      v.controls=true;v.playsInline=true;
+      const tn=posters.has((src.match(/(\d{13})\.mp4$/)||[])[1]);
+      if(tn){v.preload="none";v.poster=src.replace(/(\d{13})\.mp4$/,"thumbs/$1.jpg")}else{v.preload="metadata"}
       v.style.cssText="width:100%;display:block;aspect-ratio:16/9;background:#000;object-fit:contain";
       v.innerHTML=`<source src="${src}">Trình duyệt của bạn không phát được video này. <a href="${src}" download style="color:#ffd9bf">Tải video về</a>.`;
       fig.appendChild(v);
