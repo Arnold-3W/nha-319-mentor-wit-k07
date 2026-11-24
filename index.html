@@ -151,7 +151,7 @@
   .gallery figure{break-inside:avoid;margin:0 0 16px;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(226,82,26,.12);cursor:pointer;position:relative}
   .gallery img{width:100%;transition:.5s ease;display:block}
   .gallery figure:hover img{transform:scale(1.07)}
-  .gallery figure::after{content:"🔍";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:1.6rem;background:rgba(226,82,26,.0);opacity:0;transition:.35s}
+  .gallery figure::after{pointer-events:none;content:"🔍";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:1.6rem;background:rgba(226,82,26,.0);opacity:0;transition:.35s}
   .gallery figure:hover::after{background:rgba(226,82,26,.35);opacity:1}
   /* Bộ lọc chủ đề */
   .gallery-filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:44px}
@@ -744,7 +744,7 @@ const lb=document.getElementById('lb'),lbImg=document.getElementById('lb-img');
 let cur=0;
 function openLb(i){cur=i;lbImg.src=images[i];lb.classList.add('open')}
 function move(d){cur=(cur+d+images.length)%images.length;lbImg.src=images[cur]}
-groupsWrap.addEventListener('click',e=>{const t=e.target.closest('img');if(t)openLb(+t.dataset.i)});
+groupsWrap.addEventListener('click',e=>{const f=e.target.closest('figure');const t=f&&f.querySelector('img');if(t)openLb(+t.dataset.i)});
 document.getElementById('lb-x').onclick=()=>lb.classList.remove('open');
 document.getElementById('lb-prev').onclick=()=>move(-1);
 document.getElementById('lb-next').onclick=()=>move(1);
